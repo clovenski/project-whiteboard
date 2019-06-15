@@ -2,11 +2,12 @@ const fs = require('fs')
 
 let projectData = JSON.parse(sessionStorage.projectData)
 const resDir = __dirname + '/../projects/' + projectData.info.name + '/res/'
+const resources = projectData.resources
 
-if (fs.readdirSync(resDir).length > 0 && projectData.resources.length > 0) {
+if (fs.readdirSync(resDir).length > 0 && resources.length > 0) {
   // remove empty list text and append all the resources
   $('#list').empty()
-  projectData.resources.forEach((res) => {
+  resources.forEach((res) => {
     var container = $('<div></div>').attr({
       class: 'res',
       id: res.title

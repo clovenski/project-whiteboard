@@ -1,0 +1,29 @@
+#timeline {
+  white-space: nowrap;
+}
+
+#timeline div {
+  display: inline-grid;
+}
+
+#timeline div h3 {
+  margin: 5px 0;
+}
+
+.milestone {
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  line-height: 2em;
+  border-radius: 1em;
+  background: deepskyblue;
+  margin: 0 1em;
+  display: inline-grid;
+  color: white;
+  position: relative;
+}
+
+.active ~ li {
+  background: lightgrey;
+}
+

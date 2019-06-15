@@ -1,19 +1,19 @@
-let projectData = JSON.parse(sessionStorage.projectData)
-const resDir = __dirname + '/../projects/' + projectData.info.name + '/res/'
+let projectInfo = JSON.parse(sessionStorage.projectData).info
+const resDir = __dirname + '/../projects/' + projectInfo.name + '/res/'
 
-$('#name').html(projectData.info.name)
-if (projectData.info.description !== '') {
-  $('#description').html(projectData.info.description)
+$('#name').html(projectInfo.name)
+if (projectInfo.description !== '') {
+  $('#description').html(projectInfo.description)
 }
-projectData.info.body.forEach((element, i) => {
+projectInfo.body.forEach((element, i) => {
   var elemHtml
   switch (element.type) {
     case 'text':
       elemHtml = $('<p>' + element.value + '</p>')
-      break;
+      break
     case 'img':
       elemHtml = $('<img>').attr({ src: resDir + element.value })
-      break;
+      break
   }
-  $('#infoBody').append(elemHtml.attr({ id: 'elem' + (i + 1) }))
+  $('#infoBody').append(elemHtml.attr({ id: 'elem' + (i + 1) }), $('<br>'))
 })
