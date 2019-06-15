@@ -8,7 +8,7 @@ $('#newBtn').click(() => { $('#new form').fadeToggle() })
 $('#new form').submit((e) => {
   e.preventDefault()
   var name = $('#new form input').val()
-  projectData.name = name
+  projectData.info.name = name
   sessionStorage.projectData = JSON.stringify(projectData)
   window.location = 'info.html'
 })
