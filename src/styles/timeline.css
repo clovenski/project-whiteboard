@@ -1,3 +1,13 @@
+#content {
+  margin: 8px;
+}
+
+#timelineLink {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.4;
+}
+
 #timeline {
   white-space: nowrap;
 }
@@ -16,7 +26,7 @@
   text-align: center;
   line-height: 2em;
   border-radius: 1em;
-  background: deepskyblue;
+  background: rgb(35, 53, 73);
   margin: 0 1em;
   display: inline-grid;
   color: white;
@@ -26,4 +36,3 @@
 .active ~ li {
   background: lightgrey;
 }
-

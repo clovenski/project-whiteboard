@@ -1,0 +1,19 @@
+body {
+  margin: 0px;
+}
+
+#navbar {
+  background-color: rgb(35, 53, 73);
+  padding: 10px;
+}
+
+#navbar a {
+  text-decoration: none;
+  color: white;
+  font-size: larger;
+  margin: 15px;
+}
+
+#navbar a:hover {
+  background-color: gray;
+}
