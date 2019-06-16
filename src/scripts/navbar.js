@@ -1,4 +1,5 @@
 var navbar = $('<div></div>').attr({ id: 'navbar' })
+var homeLink = $('<a>HOME</a>').attr({ href: './home.html' })
 var infoLink = $('<a>INFO</a>').attr({
   id: 'infoLink',
   href: './info.html'
@@ -25,7 +26,7 @@ var archiveLink = $('<a>ARCHIVE</a>').attr({
 })
 
 navbar.append(
-  infoLink, resLink, timelineLink,
+  homeLink, infoLink, resLink, timelineLink,
   todoLink, issuesLink, archiveLink
 )
 $(() => {

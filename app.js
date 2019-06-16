@@ -4,12 +4,14 @@ let win
 
 function createWindow() {
   win = new BrowserWindow({
+    title: 'Project Whiteboard',
     webPreferences: {
       nodeIntegration: true
     }
   })
   win.loadFile('./src/home.html')
-  win.webContents.openDevTools()
+  win.webContents.openDevTools() // for developing
+  win.removeMenu()
   win.on('closed', () => {
     win = null
   })

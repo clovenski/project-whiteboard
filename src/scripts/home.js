@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const projectsDir = path.join(__dirname + '/../projects/')
 
-// default data of a project
+// default data of a new project
 var projectData = {
   info: {
     name: 'untitled',
@@ -15,16 +15,9 @@ var projectData = {
   }
 }
 
-$('#newBtn').on('click', () => { $('#new form').fadeToggle() })
-
-$('#new form').on('submit', (e) => {
-  e.preventDefault()
-  var name = $('#new form input').val()
-  if (name !== '') {
-    projectData.info.name = name
-    sessionStorage.projectData = JSON.stringify(projectData)
-    window.location = 'info.html'
-  }
+$('#newBtn').on('click', () => {
+  sessionStorage.projectData = JSON.stringify(projectData)
+  window.location = 'info.html'
 })
 
 $('#loadBtn').on('click', () => {
@@ -71,9 +64,4 @@ $('#loadBtn').on('click', () => {
   } else {
     alert('No projects detected in directory: ' + projectsDir)
   }
-})
-
-$('body').hide()
-$(() => {
-  $('body').fadeIn()
 })
