@@ -28,6 +28,6 @@ navbar.append(
   infoLink, resLink, timelineLink,
   todoLink, issuesLink, archiveLink
 )
-$(document).ready(() => {
+$(() => {
   $(document.body).prepend(navbar)
 })

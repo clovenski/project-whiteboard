@@ -5,6 +5,8 @@ body {
 #navbar {
   background-color: rgb(35, 53, 73);
   padding: 10px;
+  position: sticky;
+  top: 0;
 }
 
 #navbar a {

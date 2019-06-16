@@ -1,22 +1,34 @@
 const fs = require('fs')
-const projectsDir = __dirname + '/../projects/'
+const path = require('path')
+const projectsDir = path.join(__dirname + '/../projects/')
 
-var projectData = {}
+// default data of a project
+var projectData = {
+  info: {
+    name: 'untitled',
+    body: []
+  },
+  resources: [],
+  timeline: {
+    activeIndex: -1,
+    data: []
+  }
+}
 
-$('#newBtn').click(() => { $('#new form').fadeToggle() })
+$('#newBtn').on('click', () => { $('#new form').fadeToggle() })
 
-$('#new form').submit((e) => {
+$('#new form').on('submit', (e) => {
   e.preventDefault()
   var name = $('#new form input').val()
-  projectData.info.name = name
-  sessionStorage.projectData = JSON.stringify(projectData)
-  window.location = 'info.html'
+  if (name !== '') {
+    projectData.info.name = name
+    sessionStorage.projectData = JSON.stringify(projectData)
+    window.location = 'info.html'
+  }
 })
 
-$('#loadBtn').click(() => {
-  // prompt for project to load (json file)
-  // load project data into projectData and sessionStorage.projectData
-  // redirect to info.html
+$('#loadBtn').on('click', () => {
+  // display buttons for all found projects
 
   // if previously clicked, remove already present project buttons 
   if ($('#loadBtns').length != 0) {
@@ -26,7 +38,7 @@ $('#loadBtn').click(() => {
   try {
     var projects = fs.readdirSync(projectsDir)
   } catch (err) {
-    console.log('no projects detected')
+    alert('No projects detected in directory: ' + projectsDir)
     return
   }
   projects.forEach((name, index) => {
@@ -48,7 +60,7 @@ $('#loadBtn').click(() => {
       $('#loadBtns').append(btn)
   
       // add onclick event listener
-      $(btn).click(() => {
+      $(btn).on('click', () => {
         $.getJSON(projectsDir + name + '/' + name + '.json', (data) => {
           sessionStorage.projectData = JSON.stringify(data)
           window.location = 'info.html'
@@ -57,11 +69,11 @@ $('#loadBtn').click(() => {
     })
     $('.loadProjBtn').fadeIn()
   } else {
-    console.log('no projects detected')
+    alert('No projects detected in directory: ' + projectsDir)
   }
 })
 
 $('body').hide()
-$(document).ready(() => {
+$(() => {
   $('body').fadeIn()
 })
