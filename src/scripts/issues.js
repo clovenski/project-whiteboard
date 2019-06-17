@@ -2,7 +2,8 @@ let projectIssues = JSON.parse(sessionStorage.projectData).issues
 
 function saveSolution(issueID, solution) {
   // remove issue with given issueID from issues list in project json,
-  // add issue data along with given solution to archive list in proj json
+  // add issue data along with given solution to archive list in proj json,
+  // also attach date to data
 }
 
 projectIssues.forEach((issue) => {

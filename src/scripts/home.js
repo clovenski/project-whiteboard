@@ -14,7 +14,8 @@ var projectData = {
     data: []
   },
   tasks: [],
-  issues: []
+  issues: [],
+  archive: []
 }
 
 $('#newBtn').on('click', () => {
