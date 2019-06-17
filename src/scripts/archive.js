@@ -1,0 +1,3 @@
+$(() => {
+  $('#archiveLink').addClass('activeLink')
+})

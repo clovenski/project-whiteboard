@@ -2,12 +2,6 @@
   margin: 8px;
 }
 
-#resLink {
-  pointer-events: none;
-  cursor: default;
-  opacity: 0.4;
-}
-
 img {
   min-width: 150px;
   min-height: 150px;

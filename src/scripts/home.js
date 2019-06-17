@@ -12,7 +12,9 @@ var projectData = {
   timeline: {
     activeIndex: -1,
     data: []
-  }
+  },
+  tasks: [],
+  issues: []
 }
 
 $('#newBtn').on('click', () => {

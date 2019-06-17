@@ -19,3 +19,7 @@ if (fs.readdirSync(resDir).length > 0 && resources.length > 0) {
     $('#list').append(container)
   })
 }
+
+$(() => {
+  $('#resLink').addClass('activeLink')
+})

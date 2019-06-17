@@ -2,12 +2,6 @@
   margin: 8px;
 }
 
-#timelineLink {
-  pointer-events: none;
-  cursor: default;
-  opacity: 0.4;
-}
-
 #timeline {
   white-space: nowrap;
 }

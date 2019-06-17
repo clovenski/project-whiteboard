@@ -17,3 +17,7 @@ projectInfo.body.forEach((element, i) => {
   }
   $('#infoBody').append(elemHtml.attr({ id: 'elem' + (i + 1) }), $('<br>'))
 })
+
+$(() => {
+  $('#infoLink').addClass('activeLink')
+})

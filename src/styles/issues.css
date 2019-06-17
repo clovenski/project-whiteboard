@@ -1,0 +1,17 @@
+#content {
+  margin: 8px;
+}
+
+.issueDiv {
+  margin: 10px 0;
+}
+
+.issueLabel {
+  width: fit-content;
+  padding: 0 20px;
+  border-style: outset;
+}
+
+.issueLabel:hover {
+  cursor: pointer;
+}

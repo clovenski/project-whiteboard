@@ -12,3 +12,7 @@ timeline.data.forEach((milestone, i) => {
     item.attr({ class: 'active milestone' })
   }
 })
+
+$(() => {
+  $('#timelineLink').addClass('activeLink')
+})
