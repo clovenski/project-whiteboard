@@ -1,3 +1,20 @@
 #content {
   margin: 8px;
 }
+
+.optBtn, .options button {
+  border: none;
+  outline: none;
+  background-color: white;
+  padding: 3px;
+  margin: 5px;
+}
+
+.optBtn:hover, .options button:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+
+.delBtn:hover {
+  color: red;
+}

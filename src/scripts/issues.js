@@ -65,7 +65,7 @@ projectIssues.forEach((issue) => {
   var solTab = $('<div class="solTab"></div>').append(
     $('<textarea class="solTxtArea"></textarea>'),
     $('<button>Save/Archive</button>').on('click', () => {
-      var solution = $(selector + ' .tabDisplay .solTab textarea').val()
+      var solution = $(selector + ' .tabDisplay .solTab .solTxtArea').val()
       saveSolution(issue.hashid, solution)
     })
   ).hide()
