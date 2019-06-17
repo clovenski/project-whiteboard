@@ -1,9 +1,31 @@
-let projectIssues = JSON.parse(sessionStorage.projectData).issues
+const fs = require('fs')
+
+let projectData = JSON.parse(sessionStorage.projectData)
+let projectIssues = projectData.issues
+const projDir = __dirname + '/../projects/' + projectData.info.name + '/'
+const saveFilePath = projDir + projectData.info.name + '.json'
 
 function saveSolution(issueID, solution) {
   // remove issue with given issueID from issues list in project json,
   // add issue data along with given solution to archive list in proj json,
-  // also attach date to data
+  // also attach date to the object
+  $('.issueDiv #data-' + issueID).parent().remove()
+  var archivedIssue
+  projectIssues.some((issue, i) => {
+    if (issue.hashid == issueID) {
+      archivedIssue = projectIssues.splice(i, 1)[0]
+      return true
+    }
+  })
+  archivedIssue.solution = solution
+  var date = new Date()
+  var dd = String(date.getDate())
+  var mm = String(date.getMonth() + 1)
+  var yyyy = date.getFullYear()
+  archivedIssue.date = mm + '/' + dd + '/' + yyyy
+  projectData.archive.push(archivedIssue)
+  sessionStorage.projectData = JSON.stringify(projectData)
+  fs.writeFileSync(saveFilePath, JSON.stringify(projectData, null, 2))
 }
 
 projectIssues.forEach((issue) => {
