@@ -8,12 +8,14 @@
 
 .issueLabel {
   width: fit-content;
-  padding: 0 20px;
-  border-style: outset;
+  padding: 0 10px 0 0;
+  border: none;
+  outline: none;
 }
 
 .issueLabel:hover {
   cursor: pointer;
+  background-color: lightgray;
 }
 
 .activeBtn {

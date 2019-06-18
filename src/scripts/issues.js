@@ -32,10 +32,18 @@ if (projectIssues.length > 0) {
 }
 
 projectIssues.forEach((issue) => {
-  var label = $('<div>' + issue.title + '</div>').attr({
-    class: 'issueLabel'
+  var label = $('<div>&#9658; ' + issue.title + '</div>').attr({
+    class: 'issueLabel',
+    id: 'label-' + issue.hashid
   }).on('click', () => {
     $('#data-' + issue.hashid).slideToggle()
+    var lbl = $('#label-' + issue.hashid)
+    var symbolCode = lbl.html().charCodeAt(0)
+    if (symbolCode == 9658) { // == ►
+      lbl.html('&#9660; ' + issue.title)
+    } else {
+      lbl.html('&#9658; ' + issue.title)
+    }
   })
   var data = $('<div></div>').attr({
     class: 'issueData',
