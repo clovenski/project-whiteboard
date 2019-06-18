@@ -1,9 +1,9 @@
 let projectInfo = JSON.parse(sessionStorage.projectData).info
 const resDir = sessionStorage.projDir + 'res/'
 
-$('#name').html(projectInfo.name)
+$('#name').text(projectInfo.name)
 if (projectInfo.description !== '') {
-  $('#description').html(projectInfo.description)
+  $('#description').text(projectInfo.description)
 }
 projectInfo.body.forEach((element, i) => {
   var elemHtml

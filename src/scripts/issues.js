@@ -49,9 +49,12 @@ projectIssues.forEach((issue) => {
     id: 'data-' + issue.hashid
     // TODO: implement hashid for each issue when adding an issue
   })
-  var description = $('<p></p>').html(
-    issue.desc != '' ? issue.desc : '<i>empty description</i>'
-  )
+  var description = $('<p></p>')
+  if (issue.desc != '') {
+    description.text(issue.desc)
+  } else {
+    description.html('<i>empty description</i>')
+  }
   var tabsBar = $('<div class="tabsBar"></div>')
   var selector = '#data-' + issue.hashid
   tabsBar.append(

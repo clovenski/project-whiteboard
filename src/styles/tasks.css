@@ -17,15 +17,16 @@ th, td {
 
 .task {
   width: 100%;
+  padding: 2px;
+}
+
+.task:hover {
+  outline: 2px solid lightgray;
+  cursor: text;
 }
 
 .taskHeader, .statusHeader, .optionsHeader {
   cursor: default;
-}
-
-.task .taskDesc:hover {
-  outline: 1px solid gray;
-  outline-offset: 3px;
 }
 
 .status, .statusHeader, .options, .optionsHeader {

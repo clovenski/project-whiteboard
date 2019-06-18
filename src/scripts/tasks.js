@@ -9,9 +9,15 @@ const emptyDesc = 'empty task description'
 // add the given task to the table
 function addTask(task) {
   var row = $('<tr></tr>').attr({ id: 'row-' + task.hashid })
-  var desc = $('<td class="task"></td>').html(
-    $('<span class="taskDesc"></span>').text(task.desc)
-  )
+  var desc = $('<td></td>')
+  var descDiv = $('<div class="task"></div>')
+  var descSpan = $('<span class="taskDesc"></span>')
+  if (task.desc != '') {
+    descSpan.text(task.desc)
+  } else {
+    descSpan.html('<i>' + emptyDesc + '</i>')
+  }
+  desc.append(descDiv.append(descSpan))
   var status = $('<td class="status"></td>')
   var checkBox = $('<input></input>').attr({ type: 'checkbox' })
   if (task.completed) { checkBox.attr('checked', '') }
@@ -49,7 +55,7 @@ function addTask(task) {
   })
 
   // on click, allow edit task description
-  desc.children('.taskDesc').on('click', () => {
+  desc.children('.task').on('click', () => {
     var taskDesc = $('#row-' + task.hashid + ' .task .taskDesc')
     var editBox = $('<textarea></textarea>').text(
       taskDesc.text() != emptyDesc ? taskDesc.text() : ''

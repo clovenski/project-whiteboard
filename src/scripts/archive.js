@@ -30,6 +30,7 @@ projectArchive.forEach((issue) => {
     class: 'issueDiv',
     id: 'data-' + issue.hashid
   }).append(
+    // TODO: disallow issue.* to insert html code into paragraphs
     $('<p></p>').html('<b>Title:</b> ' + issue.title),
     $('<p></p>').html('<b>Description:</b> ' + issue.desc),
     $('<p></p>').html('<b>Notes:</b> ' + issue.notes),

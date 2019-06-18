@@ -13,8 +13,8 @@ if (resources.length > 0) {
       id: res.title
     })
     var img = $('<img>').attr({ src: resDir + res.ref })
-    var title = $('<h2></h2>').html(res.title)
-    var desc = $('<p></p>').html(res.desc)
+    var title = $('<h2></h2>').text(res.title)
+    var desc = $('<p></p>').text(res.desc)
     container.append(img, $('<div></div>').append(title, desc))
     $('#list').append(container)
   })

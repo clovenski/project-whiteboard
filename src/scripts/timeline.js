@@ -7,11 +7,14 @@ if (timeline.data.length > 0) {
 }
 
 timeline.data.forEach((milestone, i) => {
-  var item = $('<li></li>').attr({ class: 'milestone' }).html(i + 1)
-  var desc = $('<h3></h3>').html(milestone.desc)
-  var date = $('<span></span>').html(
-    milestone.date !== undefined ? milestone.date : '<i>TBD</i>'
-  )
+  var item = $('<li></li>').attr({ class: 'milestone' }).text(i + 1)
+  var desc = $('<h3></h3>').text(milestone.desc)
+  var date = $('<span></span>')
+  if (milestone.date !== undefined) {
+    date.text(milestone.date)
+  } else {
+    date.html('<i>TBD</i>')
+  }
   $('#timeline').append(item, $('<div></div>').append(desc, date), $('<br>'))
   if (i == timeline.activeIndex) {
     item.attr({ class: 'active milestone' })
