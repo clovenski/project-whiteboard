@@ -24,6 +24,7 @@ $('#newBtn').on('click', () => {
   sessionStorage.projDir = projDir
   sessionStorage.saveFilePath = projDir + projectData.info.name + '.json'
   sessionStorage.projectData = JSON.stringify(projectData)
+  sessionStorage.changesMade = false
   window.location = 'info.html'
 })
 
@@ -66,6 +67,7 @@ $('#loadBtn').on('click', () => {
           sessionStorage.projDir = projDir
           sessionStorage.saveFilePath = projDir + data.info.name + '.json'
           sessionStorage.projectData = JSON.stringify(data)
+          sessionStorage.changesMade = false
           window.location = 'info.html'
         })
       })

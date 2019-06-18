@@ -1,8 +1,7 @@
-const fs = require('fs')
+const allowSaving = eval(sessionStorage.allowSaving)
 
 let projectData = JSON.parse(sessionStorage.projectData)
 let projectIssues = projectData.issues
-const saveFilePath = sessionStorage.saveFilePath
 
 function saveSolution(issueID, solution) {
   // remove issue with given issueID from issues list in project json,
@@ -24,7 +23,7 @@ function saveSolution(issueID, solution) {
   archivedIssue.date = mm + '/' + dd + '/' + yyyy
   projectData.archive.push(archivedIssue)
   sessionStorage.projectData = JSON.stringify(projectData)
-  fs.writeFileSync(saveFilePath, JSON.stringify(projectData, null, 2))
+  allowSaving()
 }
 
 if (projectIssues.length > 0) {

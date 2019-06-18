@@ -5,6 +5,8 @@ let win
 function createWindow() {
   win = new BrowserWindow({
     title: 'Project Whiteboard',
+    width: 700,
+    height: 700,
     webPreferences: {
       nodeIntegration: true
     }

@@ -1,8 +1,7 @@
-const fs = require('fs')
+const allowSaving = eval(sessionStorage.allowSaving)
 
 let projectData = JSON.parse(sessionStorage.projectData)
 let projectArchive = projectData.archive
-const saveFilePath = sessionStorage.saveFilePath
 
 function removeArchive(event) {
   var targetArchive
@@ -18,7 +17,7 @@ function removeArchive(event) {
     projectData.issues.push(targetArchive)
   }
   sessionStorage.projectData = JSON.stringify(projectData)
-  fs.writeFileSync(saveFilePath, JSON.stringify(projectData, null, 2))
+  allowSaving()
   $('#data-' + event.data.id).remove()
 }
 
