@@ -27,6 +27,10 @@ function saveSolution(issueID, solution) {
   fs.writeFileSync(saveFilePath, JSON.stringify(projectData, null, 2))
 }
 
+if (projectIssues.length > 0) {
+  $('#content').empty()
+}
+
 projectIssues.forEach((issue) => {
   var label = $('<div>' + issue.title + '</div>').attr({
     class: 'issueLabel'

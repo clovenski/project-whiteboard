@@ -22,6 +22,10 @@ function removeArchive(event) {
   $('#data-' + event.data.id).remove()
 }
 
+if (projectArchive.length > 0) {
+  $('#content').empty()
+}
+
 projectArchive.forEach((issue) => {
   var container = $('<div></div>').attr({
     class: 'issueDiv',
@@ -32,14 +36,14 @@ projectArchive.forEach((issue) => {
     $('<p></p>').html('<b>Notes:</b> ' + issue.notes),
     $('<p></p>').html('<b>Solution:</b> ' + issue.solution),
     $('<p></p>').html('<b>Date:</b> ' + issue.date),
-    $('<button class="optBtn">&#9658; Options</button>').on('click', () => {
+    $('<button class="optBtn">Options &#9658;</button>').on('click', () => {
       $('#data-' + issue.hashid + ' .options').slideToggle()
       var btn = $('#data-' + issue.hashid + ' .optBtn')
-      var symbolCode = btn.html().charCodeAt(0)
+      var symbolCode = btn.html().charCodeAt(btn.html().length - 1)
       if (symbolCode == 9658) {
-        btn.html('&#9660; Options')
+        btn.html('Options &#9660;')
       } else {
-        btn.html('&#9658; Options')
+        btn.html('Options &#9658;')
       }
     })
   )

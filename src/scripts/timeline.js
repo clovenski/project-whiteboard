@@ -2,6 +2,10 @@ let projectData = JSON.parse(sessionStorage.projectData)
 const timeline = projectData.timeline
 const saveFilePath = sessionStorage.saveFilePath
 
+if (timeline.data.length > 0) {
+  $('#timeline').empty()
+}
+
 timeline.data.forEach((milestone, i) => {
   var item = $('<li></li>').attr({ class: 'milestone' }).html(i + 1)
   var desc = $('<h3></h3>').html(milestone.desc)

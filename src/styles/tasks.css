@@ -2,6 +2,10 @@
   margin: 8px;
 }
 
+table {
+  width: 100%;
+}
+
 table, th, tr, td {
   border: 1px solid black;
   border-collapse: collapse;
@@ -9,4 +13,13 @@ table, th, tr, td {
 
 th, td {
   padding: 10px;
+}
+
+.task {
+  width: 100%;
+}
+
+.status {
+  width: fit-content;
+  text-align: center;
 }
