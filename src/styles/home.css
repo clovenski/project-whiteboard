@@ -1,6 +1,20 @@
+#content {
+  margin: 8px;
+  text-align: center;
+}
+
 button {
   padding: 10px;
   background-color: rgb(35, 53, 73);
   color: white;
   outline: none;
+}
+
+#loadBtns {
+  margin: 12px;
+}
+
+#loadBtns button {
+  display: inline-block;
+  margin: 3px;
 }

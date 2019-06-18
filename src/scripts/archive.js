@@ -2,8 +2,7 @@ const fs = require('fs')
 
 let projectData = JSON.parse(sessionStorage.projectData)
 let projectArchive = projectData.archive
-const projDir = __dirname + '/../projects/' + projectData.info.name + '/'
-const saveFilePath = projDir + projectData.info.name + '.json'
+const saveFilePath = sessionStorage.saveFilePath
 
 function removeArchive(event) {
   var targetArchive

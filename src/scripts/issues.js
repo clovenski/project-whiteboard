@@ -2,8 +2,7 @@ const fs = require('fs')
 
 let projectData = JSON.parse(sessionStorage.projectData)
 let projectIssues = projectData.issues
-const projDir = __dirname + '/../projects/' + projectData.info.name + '/'
-const saveFilePath = projDir + projectData.info.name + '.json'
+const saveFilePath = sessionStorage.saveFilePath
 
 function saveSolution(issueID, solution) {
   // remove issue with given issueID from issues list in project json,

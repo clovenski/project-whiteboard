@@ -1,4 +1,5 @@
 let projectTasks = JSON.parse(sessionStorage.projectData).tasks
+const saveFilePath = sessionStorage.saveFilePath
 
 projectTasks.forEach((task) => {
   var desc = $('<td></td>').html(task.desc)

@@ -19,6 +19,10 @@ var projectData = {
 }
 
 $('#newBtn').on('click', () => {
+  // TODO: prompt for project name first
+  var projDir = path.join(projectsDir + projectData.info.name + '/')
+  sessionStorage.projDir = projDir
+  sessionStorage.saveFilePath = projDir + projectData.info.name + '.json'
   sessionStorage.projectData = JSON.stringify(projectData)
   window.location = 'info.html'
 })
@@ -58,6 +62,9 @@ $('#loadBtn').on('click', () => {
       // add onclick event listener
       $(btn).on('click', () => {
         $.getJSON(projectsDir + name + '/' + name + '.json', (data) => {
+          var projDir = path.join(projectsDir + data.info.name + '/')
+          sessionStorage.projDir = projDir
+          sessionStorage.saveFilePath = projDir + data.info.name + '.json'
           sessionStorage.projectData = JSON.stringify(data)
           window.location = 'info.html'
         })
@@ -67,4 +74,8 @@ $('#loadBtn').on('click', () => {
   } else {
     alert('No projects detected in directory: ' + projectsDir)
   }
+}) // end loadBtn onclick
+
+$(() => {
+  $('#navbar a').addClass('activeLink')
 })

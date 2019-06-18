@@ -1,5 +1,5 @@
 let projectInfo = JSON.parse(sessionStorage.projectData).info
-const resDir = __dirname + '/../projects/' + projectInfo.name + '/res/'
+const resDir = sessionStorage.projDir + 'res/'
 
 $('#name').html(projectInfo.name)
 if (projectInfo.description !== '') {
