@@ -3,7 +3,6 @@ const fs = require('fs')
 let projectData = JSON.parse(sessionStorage.projectData)
 const resDir = sessionStorage.projDir + 'res/'
 const resources = projectData.resources
-const saveFilePath = sessionStorage.saveFilePath
 
 if (resources.length > 0) {
   // remove empty list text and append all the resources
