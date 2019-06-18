@@ -19,7 +19,47 @@ th, td {
   width: 100%;
 }
 
-.status {
-  width: fit-content;
-  text-align: center;
+.taskHeader, .statusHeader, .optionsHeader {
+  cursor: default;
+}
+
+.task .taskDesc:hover {
+  outline: 1px solid gray;
+  outline-offset: 3px;
+}
+
+.status, .statusHeader, .options, .optionsHeader {
+  max-width: fit-content;
+}
+
+.editBox {
+  resize: both;
+  overflow: scroll;
+  width: 70%;
+  margin: 2px;
+  min-width: 15em;
+  min-height: 3em;
+}
+
+.status input:hover {
+  cursor: pointer;
+}
+
+.delBtn:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.addBtn {
+  border: none;
+  outline: none;
+  background-color: white;
+  font-size: 2em;
+  color: rgb(35, 53, 73);
+  margin: 3px 0;
+  padding: 0 3px;
+}
+
+.addBtn:hover {
+  cursor: pointer;
 }

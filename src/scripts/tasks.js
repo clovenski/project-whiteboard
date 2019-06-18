@@ -3,16 +3,23 @@ const allowSaving = eval(sessionStorage.allowSaving)
 let projectData = JSON.parse(sessionStorage.projectData)
 let projectTasks = projectData.tasks
 
+// string to use for tasks with no description defined by user
+const emptyDesc = 'empty task description'
+
+// add the given task to the table
 function addTask(task) {
-  // TODO: implement hashid for tasks when adding
   var row = $('<tr></tr>').attr({ id: 'row-' + task.hashid })
-  var desc = $('<td class="task"></td>').html(task.desc)
-  var status = $('<td></td>')
+  var desc = $('<td class="task"></td>').html(
+    $('<span class="taskDesc"></span>').text(task.desc)
+  )
+  var status = $('<td class="status"></td>')
   var checkBox = $('<input></input>').attr({ type: 'checkbox' })
   if (task.completed) { checkBox.attr('checked', '') }
   status.append(checkBox)
-  var delBtn = $('<button id="delBtn">delete</button>')
-  row.append(desc, status, delBtn)
+  var options = $('<td class="options"></td>')
+  var delBtn = $('<button class="delBtn">delete</button>')
+  options.append(delBtn)
+  row.append(desc, status, options)
   $('#tasksTable').append(row)
 
   // on click, update projectData and sessionStorage.projectData
@@ -40,15 +47,47 @@ function addTask(task) {
     sessionStorage.projectData = JSON.stringify(projectData)
     allowSaving()
   })
-}
+
+  // on click, allow edit task description
+  desc.children('.taskDesc').on('click', () => {
+    var taskDesc = $('#row-' + task.hashid + ' .task .taskDesc')
+    var editBox = $('<textarea></textarea>').text(
+      taskDesc.text() != emptyDesc ? taskDesc.text() : ''
+    )
+    editBox.attr('class', 'editBox')
+    editBox.on('keypress', (e) => {
+      if (e.which == 13) {
+        let newDesc = editBox.val()
+        if (newDesc == '') {
+          taskDesc.html('<i>' + emptyDesc + '</i>')
+        } else {
+          taskDesc.text(newDesc)
+        }
+        editBox.remove()
+        taskDesc.parent().show()
+        projectTasks.some((elem, i) => {
+          if (elem.hashid == task.hashid) {
+            projectTasks[i].desc = newDesc
+            return true
+          }
+        })
+        sessionStorage.projectData = JSON.stringify(projectData)
+        allowSaving()
+      }
+    }) // end editBox on keypress
+    taskDesc.parent().hide().after(editBox)
+    editBox.trigger('focus')
+  }) // end desc on click
+} // end addTask()
 
 projectTasks.forEach((task) => { addTask(task) })
 
-$('#content').append($('<button id="addTask">Add</button>').on('click', () => {
+// button to add a new task to the table
+$('#content').append($('<button class="addBtn">+</button>').on('click', () => {
   var task = {
     hashid: new Date().getTime()
       ^ Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
-    desc: 'empty task description',
+    desc: emptyDesc,
     completed: false
   }
   addTask(task)
