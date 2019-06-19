@@ -10,7 +10,7 @@ var projectData = {
   },
   resources: [],
   timeline: {
-    activeIndex: -1,
+    activeID: null,
     data: []
   },
   tasks: [],

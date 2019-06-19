@@ -6,12 +6,16 @@
   white-space: nowrap;
 }
 
-#timeline div {
-  display: inline-grid;
-}
-
 #timeline div h3 {
   margin: 5px 0;
+}
+
+.milestoneDiv {
+  display: block;
+}
+
+.milestoneDiv div {
+  display: inline-grid;
 }
 
 .milestone {
@@ -27,6 +31,24 @@
   position: relative;
 }
 
-.active ~ li {
+.active ~ div li {
   background: lightgrey;
+}
+
+.activeCheckBox {
+  pointer-events: none;
+}
+
+#addBtn {
+  border: none;
+  outline: none;
+  background-color: white;
+  font-size: 2em;
+  color: rgb(35, 53, 73);
+  margin: 3px 0;
+  padding: 0 0 0 2em;
+}
+
+#addBtn:hover {
+  cursor: pointer;
 }

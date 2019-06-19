@@ -27,3 +27,18 @@
 .notesTab textarea, .solTab textarea {
   display: block;
 }
+
+.descDiv {
+  width: fit-content;
+  padding: 3px;
+  margin: 5px;
+}
+
+.descDiv:hover {
+  outline: 1px solid lightgray;
+  cursor: text;
+}
+
+.descDiv p {
+  margin: 0px;
+}
