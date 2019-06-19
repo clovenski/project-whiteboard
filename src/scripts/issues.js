@@ -3,6 +3,8 @@ const allowSaving = eval(sessionStorage.allowSaving)
 let projectData = JSON.parse(sessionStorage.projectData)
 let projectIssues = projectData.issues
 
+const emptyDesc = 'empty description'
+
 function saveSolution(issueID, solution) {
   // remove issue with given issueID from issues list in project json,
   // add issue data along with given solution to archive list in proj json,
@@ -27,6 +29,7 @@ function saveSolution(issueID, solution) {
 }
 
 function addIssue(issue) {
+  // label to click and expand/collapse issue data
   var label = $('<div>&#9658; ' + issue.title + '</div>').attr({
     class: 'issueLabel',
     id: 'label-' + issue.hashid
@@ -44,12 +47,46 @@ function addIssue(issue) {
     class: 'issueData',
     id: 'data-' + issue.hashid
   })
+
+  var descDiv = $('<div class="descDiv"></div>')
   var description = $('<p></p>')
   if (issue.desc != '') {
     description.text(issue.desc)
   } else {
-    description.html('<i>empty description</i>')
+    description.html('<i>' + emptyDesc + '</i>')
   }
+  // editable description on click
+  descDiv.on('click', () => {
+    var issueDesc = $('#data-' + issue.hashid + ' .descDiv p')
+    var editBox = $('<textarea></textarea>').text(
+      issueDesc.text() != emptyDesc ? issueDesc.text() : ''
+    )
+    editBox.attr('class', 'editBox')
+    editBox.on('keypress', (e) => {
+      if (e.which == 13) {
+        let newDesc = editBox.val()
+        if (newDesc == '') {
+          issueDesc.html('<i>' + emptyDesc + '</i>')
+        } else {
+          issueDesc.text(newDesc)
+        }
+        editBox.remove()
+        issueDesc.parent().show()
+        projectIssues.some((elem, i) => {
+          if (elem.hashid == issue.hashid) {
+            projectIssues[i].desc = newDesc
+            return true
+          }
+        })
+        sessionStorage.projectData = JSON.stringify(projectData)
+        allowSaving()
+      }
+    }) // end editBox on keypress
+    issueDesc.parent().hide().after(editBox)
+    editBox.trigger('focus')
+  }) // end editable description func
+
+  // tab bar, notes and solution tabs
   var tabsBar = $('<div class="tabsBar"></div>')
   var selector = '#data-' + issue.hashid
   tabsBar.append(
@@ -77,8 +114,24 @@ function addIssue(issue) {
       saveSolution(issue.hashid, solution)
     })
   ).hide()
+
+  // delete button at end of issue data
+  var delBtn = $('<button>delete</button>').on('click', () => {
+    $('.issueDiv #data-' + issue.hashid).parent().remove()
+    projectIssues.some((elem, i) => {
+      if (elem.hashid == issue.hashid) {
+        projectIssues.splice(i, 1)
+        return true
+      }
+    })
+    sessionStorage.projectData = JSON.stringify(projectData)
+    allowSaving()
+  })
+
+  // append appropriately
   tabDisplay.append(notesTab, solTab)
-  data.append(description, tabsBar, tabDisplay).hide()
+  descDiv.append(description)
+  data.append(descDiv, tabsBar, tabDisplay, delBtn).hide()
   var issueDiv = $('<div class="issueDiv"></div>').append(label, data)
   $('#issueList').append(issueDiv)
 } // end addIssue()
@@ -101,6 +154,7 @@ $('#content').append($('<button class="addBtn">+</button>').on('click', () => {
       desc: '',
       completed: false
     }
+    titleInput.val('')
     addIssue(issue)
     projectIssues.push(issue)
     sessionStorage.projectData = JSON.stringify(projectData)
