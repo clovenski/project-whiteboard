@@ -26,11 +26,7 @@ function saveSolution(issueID, solution) {
   allowSaving()
 }
 
-if (projectIssues.length > 0) {
-  $('#content').empty()
-}
-
-projectIssues.forEach((issue) => {
+function addIssue(issue) {
   var label = $('<div>&#9658; ' + issue.title + '</div>').attr({
     class: 'issueLabel',
     id: 'label-' + issue.hashid
@@ -47,7 +43,6 @@ projectIssues.forEach((issue) => {
   var data = $('<div></div>').attr({
     class: 'issueData',
     id: 'data-' + issue.hashid
-    // TODO: implement hashid for each issue when adding an issue
   })
   var description = $('<p></p>')
   if (issue.desc != '') {
@@ -84,8 +79,34 @@ projectIssues.forEach((issue) => {
   ).hide()
   tabDisplay.append(notesTab, solTab)
   data.append(description, tabsBar, tabDisplay).hide()
-  $('#content').append($('<div class="issueDiv"></div>').append(label, data))
-})
+  var issueDiv = $('<div class="issueDiv"></div>').append(label, data)
+  $('#issueList').append(issueDiv)
+} // end addIssue()
+
+if (projectIssues.length > 0) {
+  $('#issueList').empty()
+}
+
+projectIssues.forEach((issue) => { addIssue(issue) })
+
+// button to add a new issue
+$('#content').append($('<input type="text" id="issueTitleInput">'))
+$('#content').append($('<button class="addBtn">+</button>').on('click', () => {
+  var titleInput = $('#issueTitleInput')
+  if (titleInput.val() != '') {
+    var issue = {
+      hashid: new Date().getTime()
+        ^ Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+      title: titleInput.val(),
+      desc: '',
+      completed: false
+    }
+    addIssue(issue)
+    projectIssues.push(issue)
+    sessionStorage.projectData = JSON.stringify(projectData)
+    allowSaving()
+  }
+}))
 
 $(() => {
   $('#issuesLink').addClass('activeLink')
