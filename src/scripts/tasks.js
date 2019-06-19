@@ -89,7 +89,7 @@ function addTask(task) {
 projectTasks.forEach((task) => { addTask(task) })
 
 // button to add a new task to the table
-$('#content').append($('<button class="addBtn">+</button>').on('click', () => {
+$('#content').append($('<button id="addBtn">+</button>').on('click', () => {
   var task = {
     hashid: new Date().getTime()
       ^ Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),

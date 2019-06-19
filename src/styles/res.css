@@ -9,7 +9,7 @@ img {
   max-height: 300px;
 }
 
-.res div {
+.resDiv .resInfo {
   display: inline-block;
   overflow: hidden;
 }

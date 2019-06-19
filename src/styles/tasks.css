@@ -51,7 +51,7 @@ th, td {
   cursor: pointer;
 }
 
-.addBtn {
+#addBtn {
   border: none;
   outline: none;
   background-color: white;
@@ -61,6 +61,6 @@ th, td {
   padding: 0 3px;
 }
 
-.addBtn:hover {
+#addBtn:hover {
   cursor: pointer;
 }
