@@ -18,13 +18,7 @@
   background-color: lightgray;
 }
 
-.activeBtn {
-  pointer-events: none;
-  cursor: default;
-  opacity: 0.7;
-}
-
-.notesTab textarea, .solTab textarea {
+.solDiv .solTextArea {
   display: block;
 }
 

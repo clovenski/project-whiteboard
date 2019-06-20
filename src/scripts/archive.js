@@ -30,12 +30,10 @@ projectArchive.forEach((issue) => {
     class: 'issueDiv',
     id: 'data-' + issue.hashid
   }).append(
-    // TODO: disallow issue.* to insert html code into paragraphs
-    $('<p></p>').html('<b>Title:</b> ' + issue.title),
-    $('<p></p>').html('<b>Description:</b> ' + issue.desc),
-    $('<p></p>').html('<b>Notes:</b> ' + issue.notes),
-    $('<p></p>').html('<b>Solution:</b> ' + issue.solution),
-    $('<p></p>').html('<b>Date:</b> ' + issue.date),
+    $('<p></p>').text(issue.title).prepend('<b>Title:</b> '),
+    $('<p></p>').text(issue.desc).prepend('<b>Description:</b> '),
+    $('<p></p>').text(issue.solution).prepend('<b>Solution:</b> '),
+    $('<p></p>').text(issue.date).prepend('<b>Date:</b> '),
     $('<button class="optBtn">Options &#9658;</button>').on('click', () => {
       $('#data-' + issue.hashid + ' .options').slideToggle()
       var btn = $('#data-' + issue.hashid + ' .optBtn')

@@ -93,34 +93,17 @@ function addIssue(issue) {
     editBox.trigger('focus')
   }) // end editable description func
 
-  // tab bar, notes and solution tabs
-  var tabsBar = $('<div class="tabsBar"></div>')
   var selector = '#data-' + issue.hashid
-  tabsBar.append(
-    $('<button class="notesBtn activeBtn">Notes</button>').on('click', () => {
-      $(selector + ' .tabDisplay .activeTab').hide().removeClass('activeTab')
-      $(selector + ' .tabDisplay .notesTab').show().addClass('activeTab')
-      $(selector + ' .tabsBar .activeBtn').removeClass('activeBtn')
-      $(selector + ' .tabsBar .notesBtn').addClass('activeBtn')
-    }),
-    $('<button class="solBtn">Solution</button>').on('click', () => {
-      $(selector + ' .tabDisplay .activeTab').hide().removeClass('activeTab')
-      $(selector + ' .tabDisplay .solTab').show().addClass('activeTab')
-      $(selector + ' .tabsBar .activeBtn').removeClass('activeBtn')
-      $(selector + ' .tabsBar .solBtn').addClass('activeBtn')
+  var solDiv = $('<div class="solDiv"></div>').append(
+    $('<p>Solution:</p>').css('margin', 0),
+    $('<textarea class="solTextArea"></textarea>'),
+    $('<button class="archBtn">Archive solution</button>').on('click', () => {
+      let solution = $(selector + ' .solDiv .solTextArea').val()
+      if (solution != '') {
+        saveSolution(issue.hashid, solution)
+      }
     })
   )
-  var tabDisplay = $('<div class="tabDisplay"></div>')
-  var notesTab = $('<div></div>').attr({
-    class: 'notesTab activeTab'
-  }).html($('<textarea></textarea>').text(issue.notes))
-  var solTab = $('<div class="solTab"></div>').append(
-    $('<textarea class="solTxtArea"></textarea>'),
-    $('<button>Save/Archive</button>').on('click', () => {
-      var solution = $(selector + ' .tabDisplay .solTab .solTxtArea').val()
-      saveSolution(issue.hashid, solution)
-    })
-  ).hide()
 
   // delete button at end of issue data
   var delBtn = $('<button>delete</button>').on('click', () => {
@@ -136,12 +119,12 @@ function addIssue(issue) {
   })
 
   // append appropriately
-  tabDisplay.append(notesTab, solTab)
   descDiv.append(description)
-  data.append(descDiv, tabsBar, tabDisplay, delBtn).hide()
+  data.append(descDiv, solDiv, delBtn).hide()
   var issueDiv = $('<div class="issueDiv"></div>').append(label, data)
   $('#issueList').append(issueDiv)
-} // end addIssue()
+}
+// end addIssue()
 
 if (projectIssues.length > 0) {
   $('#issueList').empty()
