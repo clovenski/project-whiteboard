@@ -2,14 +2,33 @@
   margin: 8px;
 }
 
-img {
+.resImg {
   min-width: 150px;
   min-height: 150px;
   max-width: 300px;
   max-height: 300px;
+  margin: 10px;
 }
 
 .resDiv .resInfo {
   display: inline-block;
   overflow: hidden;
+}
+
+.resInfo {
+  max-width: 20em;
+}
+.resTitle, .resDesc {
+  word-wrap: normal;
+}
+
+.placeholder {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: lightgray;
+  color: gray;
+  text-align: center;
+  margin: 10px;
+  line-height: 30px;
 }
