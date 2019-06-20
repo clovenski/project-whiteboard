@@ -19,7 +19,7 @@ var projectData = {
 }
 
 $('#newBtn').on('click', () => {
-  // TODO: prompt for project name first
+  // TODO: prompt for project name first, along with author name
   var projDir = path.join(projectsDir + projectData.info.name + '/')
   sessionStorage.projDir = projDir
   sessionStorage.saveFilePath = projDir + projectData.info.name + '.json'

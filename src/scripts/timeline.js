@@ -92,8 +92,8 @@ function addMilestone(milestone, i, asActive) {
     timeline.activeID = milestone.hashid
     sessionStorage.projectData = JSON.stringify(projectData)
     allowSaving()
-  })
-  var delBtn = $('<button>delete</button>').on('click', () => {
+  }).attr('class', 'checkBox')
+  var delBtn = $('<button id="delBtn">delete</button>').on('click', () => {
     if (container.hasClass('active')) {
       let target = container.prev().length == 1 ?
         container.prev() : container.next()

@@ -6,7 +6,7 @@ function createWindow() {
   win = new BrowserWindow({
     title: 'Project Whiteboard',
     minWidth: 300,
-    minHeight: 300,
+    minHeight: 370,
     width: 700,
     height: 700,
     webPreferences: {

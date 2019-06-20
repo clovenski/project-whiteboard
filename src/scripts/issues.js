@@ -144,7 +144,7 @@ projectIssues.forEach((issue) => { addIssue(issue) })
 
 // button to add a new issue
 $('#addBtn').on('click', () => {
-  var titleInput = $('#issueTitleInput')
+  var titleInput = $('#titleInput')
   if (titleInput.val() != '') {
     var issue = {
       hashid: new Date().getTime()

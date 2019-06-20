@@ -71,3 +71,11 @@
 #addBtn:hover {
   cursor: pointer;
 }
+
+#delBtn, .checkBox {
+  cursor: pointer;
+}
+
+#delBtn:hover {
+  color: red;
+}
