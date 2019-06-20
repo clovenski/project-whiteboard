@@ -19,6 +19,7 @@ function addToBody(element) {
       break
     case 'img':
       elemHtml = $('<img>').attr({ src: element.value })
+      elemHtml.on('error', () => { elemHtml.remove() })
       break
   }
   $('#infoBody').append(elemHtml.attr('id', 'elem-' + element.hashid))

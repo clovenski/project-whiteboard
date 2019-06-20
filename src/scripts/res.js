@@ -109,8 +109,30 @@ function addResource(res) {
       key: 'desc'
     }, editableText
   )
+
+  var delBtn = $('<button id="delBtn">delete</button>')
+  delBtn.on('click', () => {
+    container.remove()
+    resources.some((elem, i) => {
+      if (elem.hashid == res.hashid) {
+        resources.splice(i, 1)
+        return true
+      }
+    })
+    // remove resource from info.body if exists
+    projectData.info.body.forEach((elem, i) => {
+      if (elem.type == 'img' && elem.value == res.ref) {
+        projectData.info.body.splice(i, 1)
+      }
+    })
+
+    sessionStorage.projectData = JSON.stringify(projectData)
+    allowSaving()
+  })
+
   container.append(
-    img, $('<div class="resInfo"></div>').append(title, desc), $('<hr>')
+    img, $('<div class="resInfo"></div>').append(title, desc),
+    delBtn, $('<hr>')
   )
   $('#list').append(container)
 } // end addResource()
