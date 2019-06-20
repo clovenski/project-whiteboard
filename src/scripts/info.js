@@ -28,18 +28,22 @@ projectInfo.body.forEach((element) => { addToBody(element) })
 
 // input text area on enter keypress func
 $('#inputText').on('keypress', (e) => {
-  let text = $('#inputText').val()
-  if (e.which == 13 && text !== '') {
-    let element = {
-      hashid: new Date().getTime()
-        ^ Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
-      type: 'text',
-      value: text
+  if (e.which == 13) {
+    e.preventDefault()
+    let text = $('#inputText').val()
+    if (text != '') {
+      let element = {
+        hashid: new Date().getTime()
+          ^ Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+        type: 'text',
+        value: text
+      }
+      addToBody(element)
+      projectInfo.body.push(element)
+      sessionStorage.projectData = JSON.stringify(projectData)
+      allowSaving()
     }
-    addToBody(element)
-    projectInfo.body.push(element)
-    sessionStorage.projectData = JSON.stringify(projectData)
-    allowSaving()
+    $('#inputText').val('')
   }
 })
 

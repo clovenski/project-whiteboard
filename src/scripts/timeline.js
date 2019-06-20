@@ -12,10 +12,9 @@ function editableText(e) {
   let id = e.data.id
   let maxChars = e.data.maxChars
   let defaultVal = e.data.defVal
-  let editingDesc = e.data.editingDesc
-  let editBox = $('<textarea></textarea>').text(
-    target.text() != defaultVal ? target.text() : ''
-  )
+  let key = e.data.key
+  let oldVal = target.text() != defaultVal ? target.text() : ''
+  let editBox = $('<textarea></textarea>').text(oldVal)
   editBox.attr({
     class: 'editBox',
     maxlength: maxChars
@@ -32,18 +31,22 @@ function editableText(e) {
       target.show()
       timeline.data.some((elem, i) => {
         if (elem.hashid == id) {
-          if (editingDesc) {
-            timeline.data[i].desc = newVal
-          } else {
-            timeline.data[i].date = newVal
-          }
+          timeline.data[i][key] = newVal
           return true
         }
       })
-      sessionStorage.projectData = JSON.stringify(projectData)
-      allowSaving()
+      if (newVal != oldVal) {
+        sessionStorage.projectData = JSON.stringify(projectData)
+        allowSaving()
+      }
     }
   }) // end editBox on keypress
+  // trigger enter keypress when editBox loses focus
+  editBox.on('focusout', () => {
+    let event = $.Event('keypress', { which: 13 })
+    editBox.trigger(event)
+  })
+
   target.hide().after(editBox)
   editBox.trigger('focus')
 } // end editableText()
@@ -65,7 +68,7 @@ function addMilestone(milestone, i, asActive) {
       id: milestone.hashid,
       maxChars: 40,
       defVal: defaultTitle,
-      editingDesc: true
+      key: 'desc'
     }, editableText
   )
   var date = $('<span class="msDate"></span>')
@@ -80,7 +83,7 @@ function addMilestone(milestone, i, asActive) {
       id: milestone.hashid,
       maxChars: 10,
       defVal: defaultDate,
-      editingDesc: false
+      key: 'date'
     }, editableText
   )
 

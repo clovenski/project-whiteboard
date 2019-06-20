@@ -57,9 +57,8 @@ function addTask(task) {
   // on click, allow edit task description
   desc.children('.task').on('click', () => {
     var taskDesc = $('#row-' + task.hashid + ' .task .taskDesc')
-    var editBox = $('<textarea></textarea>').text(
-      taskDesc.text() != emptyDesc ? taskDesc.text() : ''
-    )
+    var oldDesc = taskDesc.text() != emptyDesc ? taskDesc.text() : ''
+    var editBox = $('<textarea></textarea>').text(oldDesc)
     editBox.attr('class', 'editBox')
     editBox.on('keypress', (e) => {
       if (e.which == 13) {
@@ -77,10 +76,18 @@ function addTask(task) {
             return true
           }
         })
-        sessionStorage.projectData = JSON.stringify(projectData)
-        allowSaving()
+        if (newDesc != oldDesc) {
+          sessionStorage.projectData = JSON.stringify(projectData)
+          allowSaving()
+        }
       }
     }) // end editBox on keypress
+    // trigger enter keypress when editBox loses focus
+    editBox.on('focusout', () => {
+      let event = $.Event('keypress', { which: 13 })
+      editBox.trigger(event)
+    })
+
     taskDesc.parent().hide().after(editBox)
     editBox.trigger('focus')
   }) // end desc on click

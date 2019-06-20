@@ -12,14 +12,31 @@
 
 .resDiv .resInfo {
   display: inline-block;
+}
+
+.resDiv {
   overflow: hidden;
 }
 
 .resInfo {
   max-width: 20em;
+  margin: 5px;
 }
+
 .resTitle, .resDesc {
   word-wrap: normal;
+  padding: 2px;
+  width: fit-content;
+}
+
+.resTitle:hover, .resDesc:hover {
+  outline: 1px solid gray;
+  cursor: text;
+}
+
+.editBox {
+  resize: none;
+  height: 3em;
 }
 
 .placeholder {

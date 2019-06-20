@@ -58,9 +58,8 @@ function addIssue(issue) {
   // editable description on click
   descDiv.on('click', () => {
     var issueDesc = $('#data-' + issue.hashid + ' .descDiv p')
-    var editBox = $('<textarea></textarea>').text(
-      issueDesc.text() != emptyDesc ? issueDesc.text() : ''
-    )
+    var oldDesc = issueDesc.text() != emptyDesc ? issueDesc.text() : ''
+    var editBox = $('<textarea></textarea>').text(oldDesc)
     editBox.attr('class', 'editBox')
     editBox.on('keypress', (e) => {
       if (e.which == 13) {
@@ -78,10 +77,18 @@ function addIssue(issue) {
             return true
           }
         })
-        sessionStorage.projectData = JSON.stringify(projectData)
-        allowSaving()
+        if (newDesc != oldDesc) {
+          sessionStorage.projectData = JSON.stringify(projectData)
+          allowSaving()
+        }
       }
     }) // end editBox on keypress
+    // trigger enter keypress when editBox loses focus
+    editBox.on('focusout', () => {
+      let event = $.Event('keypress', { which: 13 })
+      editBox.trigger(event)
+    })
+
     issueDesc.parent().hide().after(editBox)
     editBox.trigger('focus')
   }) // end editable description func

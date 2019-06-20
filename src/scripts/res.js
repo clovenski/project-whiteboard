@@ -6,6 +6,49 @@ const dialog = remote.dialog
 let projectData = JSON.parse(sessionStorage.projectData)
 const resources = projectData.resources
 
+const defTitle = 'New Resource'
+const defDesc = 'empty description'
+
+function editableText(e) {
+  let target = e.data.target
+  let id = e.data.id
+  let defaultVal = e.data.defVal
+  let key = e.data.key
+  let oldVal = target.text() != defaultVal ? target.text() : ''
+  let editBox = $('<textarea></textarea>').text(oldVal)
+  editBox.attr({ class: 'editBox' })
+  editBox.on('keypress', (e) => {
+    if (e.which == 13) {
+      let newVal = editBox.val()
+      if (newVal == '') {
+        target.html('<i>' + defaultVal + '</i>')
+      } else {
+        target.text(newVal)
+      }
+      editBox.remove()
+      target.show()
+      resources.some((elem, i) => {
+        if (elem.hashid == id) {
+          resources[i][key] = newVal
+          return true
+        }
+      })
+      if (newVal != oldVal) {
+        sessionStorage.projectData = JSON.stringify(projectData)
+        allowSaving()
+      }
+    }
+  }) // end editBox on keypress
+  // trigger enter keypress when editBox loses focus
+  editBox.on('focusout', () => {
+    let event = $.Event('keypress', { which: 13 })
+    editBox.trigger(event)
+  })
+
+  target.hide().after(editBox)
+  editBox.trigger('focus')
+}
+
 function addResource(res) {
   var container = $('<div></div>').attr({
     class: 'resDiv',
@@ -40,11 +83,37 @@ function addResource(res) {
     container.prepend(sub)
   }) // end error handling when broken ref
 
-  var title = $('<h2 class="resTitle"></h2>').text(res.title)
-  var desc = $('<p class="resDesc"></p>').text(res.desc)
-  container.append(img, $('<div class="resInfo"></div>').append(title, desc))
+  var title = $('<h2 class="resTitle"></h2>')
+  if (res.title !== '') {
+    title.text(res.title)
+  } else {
+    title.html('<i>' + defTitle + '</i>')
+  }
+  title.on('click', {
+      target: title,
+      id: res.hashid,
+      defVal: defTitle,
+      key: 'title'
+    }, editableText
+  )
+  var desc = $('<p class="resDesc"></p>')
+  if (res.desc !== '') {
+    desc.text(res.desc)
+  } else {
+    desc.html('<i>' + defDesc + '</i>')
+  }
+  desc.on('click', {
+      target: desc,
+      id: res.hashid,
+      defVal: defDesc,
+      key: 'desc'
+    }, editableText
+  )
+  container.append(
+    img, $('<div class="resInfo"></div>').append(title, desc), $('<hr>')
+  )
   $('#list').append(container)
-}
+} // end addResource()
 
 resources.forEach((res) => { addResource(res) })
 
