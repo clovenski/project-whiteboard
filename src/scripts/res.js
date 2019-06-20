@@ -17,7 +17,7 @@ function addResource(res) {
     sub.attr({ class: 'placeholder' })
     sub.on('click', () => {
       let result = dialog.showOpenDialog(remote.getCurrentWindow(), {
-        title: 'Add resources',
+        title: 'Add reference',
         filters: [
           { name: 'Images', extensions: ['png', 'jpg', 'gif'] }
         ],
@@ -48,7 +48,7 @@ function addResource(res) {
 
 resources.forEach((res) => { addResource(res) })
 
-var addBtn = $('<button>Add resources</button>').on('click', () => {
+$('#addBtn').on('click', () => {
   var results = dialog.showOpenDialog(remote.getCurrentWindow(), {
     title: 'Add resources',
     filters: [
@@ -73,9 +73,6 @@ var addBtn = $('<button>Add resources</button>').on('click', () => {
     allowSaving()
   }
 }) // end add button on click func
-addBtn.attr('id', 'addBtn')
-
-$('#content').append(addBtn)
 
 $(() => {
   $('#resLink').addClass('activeLink')

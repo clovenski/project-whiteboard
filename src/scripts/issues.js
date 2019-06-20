@@ -143,8 +143,7 @@ if (projectIssues.length > 0) {
 projectIssues.forEach((issue) => { addIssue(issue) })
 
 // button to add a new issue
-$('#content').append($('<input type="text" id="issueTitleInput">'))
-$('#content').append($('<button class="addBtn">+</button>').on('click', () => {
+$('#addBtn').on('click', () => {
   var titleInput = $('#issueTitleInput')
   if (titleInput.val() != '') {
     var issue = {
@@ -160,7 +159,7 @@ $('#content').append($('<button class="addBtn">+</button>').on('click', () => {
     sessionStorage.projectData = JSON.stringify(projectData)
     allowSaving()
   }
-}))
+})
 
 $(() => {
   $('#issuesLink').addClass('activeLink')

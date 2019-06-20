@@ -1,5 +1,6 @@
 #content {
   margin: 8px;
+  overflow: hidden;
 }
 
 #timeline {
@@ -29,6 +30,24 @@
   display: inline-grid;
   color: white;
   position: relative;
+}
+
+.msDate {
+  width: fit-content;
+}
+
+.msDesc, .msDate {
+  padding: 3px;
+}
+
+.msDesc:hover, .msDate:hover {
+  outline: 1px solid gray;
+}
+
+.editBox {
+  width: max-content;
+  height: max-content;
+  resize: none;
 }
 
 .active ~ div li {
