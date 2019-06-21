@@ -145,7 +145,7 @@ function addToBody(element) {
       break
     case 'img':
       elemHtml = $('<img>').attr({ src: element.value })
-      elemHtml.on('error', () => { elemHtml.remove() })
+      elemHtml.on('error', () => { elemDiv.remove() })
       break
   }
   var delBtn = $('<button class="delBtn">delete</button>').on('click', {
