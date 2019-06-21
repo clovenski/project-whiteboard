@@ -71,13 +71,13 @@ function addIssue(issue) {
         }
         editBox.remove()
         issueDesc.parent().show()
-        projectIssues.some((elem, i) => {
-          if (elem.hashid == issue.hashid) {
-            projectIssues[i].desc = newDesc
-            return true
-          }
-        })
         if (newDesc != oldDesc) {
+          projectIssues.some((elem, i) => {
+            if (elem.hashid == issue.hashid) {
+              projectIssues[i].desc = newDesc
+              return true
+            }
+          })
           sessionStorage.projectData = JSON.stringify(projectData)
           allowSaving()
         }

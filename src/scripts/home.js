@@ -5,7 +5,8 @@ const projectsDir = path.join(__dirname + '/../projects/')
 // default data of a new project
 var projectData = {
   info: {
-    name: 'untitled',
+    name: 'untitled', //placeholder, expected to be overwritten
+    author: '',
     body: []
   },
   resources: [],
@@ -19,7 +20,7 @@ var projectData = {
 }
 
 $('#newBtn').on('click', () => {
-  // TODO: prompt for project name first, along with author name
+  // TODO: prompt for project name first
   var projDir = path.join(projectsDir + projectData.info.name + '/')
   sessionStorage.projDir = projDir
   sessionStorage.saveFilePath = projDir + projectData.info.name + '.json'

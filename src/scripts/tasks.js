@@ -70,13 +70,13 @@ function addTask(task) {
         }
         editBox.remove()
         taskDesc.parent().show()
-        projectTasks.some((elem, i) => {
-          if (elem.hashid == task.hashid) {
-            projectTasks[i].desc = newDesc
-            return true
-          }
-        })
         if (newDesc != oldDesc) {
+          projectTasks.some((elem, i) => {
+            if (elem.hashid == task.hashid) {
+              projectTasks[i].desc = newDesc
+              return true
+            }
+          })
           sessionStorage.projectData = JSON.stringify(projectData)
           allowSaving()
         }

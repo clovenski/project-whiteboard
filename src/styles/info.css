@@ -2,8 +2,33 @@
   margin: 8px;
 }
 
-#infoBody p, #infoBody img {
-  display: block;
+.editable {
+  padding: 4px;
+  width: fit-content;
+}
+
+.editable:hover {
+  outline: 1px solid gray;
+  cursor: text;
+}
+
+.elemDiv {
+  margin: 2em 0;
+}
+
+.elemDiv p,
+.elemDiv .delBtn,
+.elemDiv img {
+  display: inline;
+}
+
+.delBtn {
+  margin: 0 0 0 1em;
+}
+
+.delBtn:hover {
+  cursor: pointer;
+  color: red;
 }
 
 #infoBody img {

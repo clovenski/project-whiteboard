@@ -29,13 +29,13 @@ function editableText(e) {
       }
       editBox.remove()
       target.show()
-      timeline.data.some((elem, i) => {
-        if (elem.hashid == id) {
-          timeline.data[i][key] = newVal
-          return true
-        }
-      })
       if (newVal != oldVal) {
+        timeline.data.some((elem, i) => {
+          if (elem.hashid == id) {
+            timeline.data[i][key] = newVal
+            return true
+          }
+        })
         sessionStorage.projectData = JSON.stringify(projectData)
         allowSaving()
       }

@@ -27,13 +27,13 @@ function editableText(e) {
       }
       editBox.remove()
       target.show()
-      resources.some((elem, i) => {
-        if (elem.hashid == id) {
-          resources[i][key] = newVal
-          return true
-        }
-      })
       if (newVal != oldVal) {
+        resources.some((elem, i) => {
+          if (elem.hashid == id) {
+            resources[i][key] = newVal
+            return true
+          }
+        })
         sessionStorage.projectData = JSON.stringify(projectData)
         allowSaving()
       }
@@ -47,7 +47,7 @@ function editableText(e) {
 
   target.hide().after(editBox)
   editBox.trigger('focus')
-}
+} // end editableText()
 
 function addResource(res) {
   var container = $('<div></div>').attr({
