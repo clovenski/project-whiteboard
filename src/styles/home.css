@@ -10,6 +10,10 @@ button {
   outline: none;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 #loadBtns {
   margin: 12px;
 }

@@ -20,13 +20,23 @@ var projectData = {
 }
 
 $('#newBtn').on('click', () => {
-  // TODO: prompt for project name first
-  var projDir = path.join(projectsDir + projectData.info.name + '/')
-  sessionStorage.projDir = projDir
-  sessionStorage.saveFilePath = projDir + projectData.info.name + '.json'
-  sessionStorage.projectData = JSON.stringify(projectData)
-  sessionStorage.changesMade = false
-  window.location = 'info.html'
+  // toggle showing input and button for creating a new project
+  $('#createDiv').slideToggle()
+})
+$('#createDiv').hide()
+
+$('#createBtn').on('click', () => {
+  let projName = $('#createDiv #projNameInput').val()
+  if (projName != '') {
+    var projDir = path.join(projectsDir + projName + '/')
+    sessionStorage.projDir = projDir
+    sessionStorage.saveFilePath = projDir + projName + '.json'
+    projectData.info.name = projName
+
+    sessionStorage.projectData = JSON.stringify(projectData)
+    sessionStorage.changesMade = false
+    window.location = 'info.html'
+  }
 })
 
 $('#loadBtn').on('click', () => {
