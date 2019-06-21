@@ -1,7 +1,8 @@
 sessionStorage.allowSaving = () => {
   sessionStorage.changesMade = true
   $('#saveBtn, #saveAsBtn').removeClass('activeLink')
-  var btnFunc = () => {
+  var btnFunc = (e) => {
+    e.preventDefault()
     require('fs').writeFileSync(
       sessionStorage.saveFilePath,
       JSON.stringify(JSON.parse(sessionStorage.projectData), null, 2)
