@@ -1,7 +1,15 @@
 // const projectData is defined: object containing all project data
 const fs = require('fs')
+const tmp = require('tmp')
+const archiver = require('archiver')
 const path = require('path')
 window.$ = window.jQuery = require('jquery')
+
+
+// append info to header: path to publishes directory
+$('#header').append('The zip file will be located in '
+  + path.resolve(__dirname, '../publishes/')
+)
 
 $('title').text(projectData.info.name)
 
@@ -215,14 +223,55 @@ if (projectData.archive.length == 0) {
 $('#publishBtn').on('click', () => {
   $('#header, #control').remove()
 
-  // change src ref for all images to res/ dir; to be zipped with html
+  // change src ref for all images to res/ dir
+  // and copy all to tmp dir to be zipped with html
+  let tmpDir = tmp.dirSync({ mode: '0755', unsafeCleanup: true })
+  let resDir = path.join(tmpDir.name, 'res/')
+  fs.mkdirSync(resDir)
   $.each($('img'), (_, val) => {
     val = $(val)
-    let newPath = './res/' + path.basename(val.attr('src'))
+    let oldPath = val.attr('src')
+    let basename = path.basename(oldPath)
+    let newPath = path.join('./res/', basename)
     val.attr('src', newPath)
+
+    fs.copyFileSync(oldPath, path.join(resDir, basename))
   })
 
   // saving page state
   let publishedHTML = `<!DOCTYPE html><html>${$('html').html()}</html>`
+  fs.writeFileSync(path.join(tmpDir.name, 'index.html'), publishedHTML)
+
+  // clear html body, show progress
+  $('body').empty().append(
+    $('<p style="font-size:1.5em">Generating the zip file. . . </p>')
+  )
+
+  // zip the directory
+  let zipFilePath = path.resolve(
+    `${__dirname}/../publishes/${projectData.info.name}.zip`
+  )
+  if (!fs.existsSync(zipFilePath)) {
+    // create publishes dir if not exists
+    if (!fs.existsSync(path.resolve(`${__dirname}/../publishes/`))) {
+      fs.mkdirSync(path.resolve(`${__dirname}/../publishes/`))
+    }
+    // create zip file
+    fs.closeSync(fs.openSync(zipFilePath, 'w'))
+  }
+
+  let output = fs.createWriteStream(zipFilePath)
+  output.on('finish', () => {
+    // show 'DONE' for confirmation of zip file generated
+    $('body p').append($('<span style="color:green">DONE</span>'))
+    $('body').append($(`<p>File path: ${zipFilePath}</p>`))
+    $('body').append($('<p>You can now close this window.</p>'))
+    tmpDir.removeCallback()
+  })
+  let archive = archiver('zip', { zlib: { level: 9 } })
+  archive.on('error', (e) => { throw e })
+  archive.pipe(output)
+  archive.directory(tmpDir.name, projectData.info.name)
+  archive.finalize()
 })
 
