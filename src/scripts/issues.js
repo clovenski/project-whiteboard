@@ -126,10 +126,6 @@ function addIssue(issue) {
 }
 // end addIssue()
 
-if (projectIssues.length > 0) {
-  $('#issueList').empty()
-}
-
 projectIssues.forEach((issue) => { addIssue(issue) })
 
 // button to add a new issue

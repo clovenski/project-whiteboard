@@ -36,3 +36,19 @@
 .descDiv p {
   margin: 0px;
 }
+
+#addBtn {
+  border: none;
+  outline: none;
+  background-color: white;
+  font-size: 2em;
+  color: rgb(35, 53, 73);
+  margin: 3px 0;
+  padding: 0 3px;
+  position: relative;
+  bottom: -6px;
+}
+
+#addBtn:hover {
+  cursor: pointer;
+}

@@ -9,7 +9,10 @@ window.$ = window.jQuery = require('jquery')
 // append info to header: path to publishes directory
 $('#header').append('The zip file will be located in '
   + path.resolve(__dirname, '../publishes/')
-)
+).css({
+  position: 'sticky',
+  top: 0
+})
 
 $('title').text(projectData.info.name)
 
