@@ -241,6 +241,17 @@ $('#publishBtn').on('click', () => {
     fs.copyFileSync(oldPath, path.join(resDir, basename))
   })
 
+  // generate README file in tmp dir
+  let readmeData = `Project name: ${projectData.info.name}\n`
+  if (projectData.info.author !== '') {
+    readmeData += `Author: ${projectData.info.author}\n`
+  }
+  readmeData += `Published on: ${new Date().toDateString()}\n`
+  readmeData += '\nThe project can be viewed with index.html.\n'
+  readmeData += '\nCheck out Project Whiteboard at '
+    + 'https://github.com/clovenski/project-whiteboard' + '\n'
+  fs.writeFileSync(path.join(tmpDir.name, 'README.txt'), readmeData)
+
   // saving page state
   let publishedHTML = `<!DOCTYPE html><html>${$('html').html()}</html>`
   fs.writeFileSync(path.join(tmpDir.name, 'index.html'), publishedHTML)
