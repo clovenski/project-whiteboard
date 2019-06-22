@@ -1,3 +1,4 @@
+// func to allow saving
 sessionStorage.allowSaving = () => {
   sessionStorage.changesMade = true
   $('#saveBtn, #saveAsBtn').removeClass('activeLink')
@@ -16,7 +17,7 @@ sessionStorage.allowSaving = () => {
 }
 
 var navbar = $('<div></div>').attr({ id: 'navbar' })
-var homeLink = $('<a>HOME</a>').attr({ href: './home.html' })
+var homeLink = $('<a>HOME</a>').attr({ href: '#' })
 var saveBtn = $('<a id="saveBtn" href="#">SAVE</a>')
 var infoLink = $('<a>INFO</a>').attr({
   id: 'infoLink',
@@ -47,6 +48,33 @@ navbar.append(
   homeLink, saveBtn, infoLink, resLink, timelineLink,
   todoLink, issuesLink, archiveLink
 )
+
+// func to handle unsaved changes
+//   return 0 to save, 1 to not save,
+//   2 to cancel the exit
+function savingBeforeExit() {
+  if (eval(sessionStorage.changesMade)) {
+    let dialog = require('electron').remote.dialog
+    return dialog.showMessageBox({
+      type: 'question',
+      message: 'Save before exiting?',
+      detail: 'testing',
+      buttons: ['Save', 'Don\'t save', 'Cancel']
+    })
+  } else { return undefined }
+}
+
+// home button func
+homeLink.on('click', (e) => {
+  e.preventDefault()
+  let resp = savingBeforeExit()
+  if (resp == 0) { // save
+    $('#saveBtn').trigger('click')
+  } else if (resp == 2) { // cancel
+    return
+  }
+  window.location = './home.html'
+})
 
 // link for publishing the project
 var publishLink = $('<a>PUBLISH</a>').attr({
