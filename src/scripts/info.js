@@ -181,7 +181,10 @@ $('#inputText').on('keypress', (e) => {
 })
 
 function addToResPanel(res) {
-  var img = $('<img>').attr({ src: res.ref })
+  var img = $('<img>').attr({
+    src: res.ref,
+    title: 'insert image into page'
+  })
   img.on('click', () => {
     let element = {
       hashid: new Date().getTime()

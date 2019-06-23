@@ -248,7 +248,8 @@ $('#publishBtn').on('click', () => {
   }
   readmeData += `Published on: ${new Date().toDateString()}\n`
   readmeData += '\nThe project can be viewed with index.html.\n'
-  readmeData += '\nCheck out Project Whiteboard at '
+  readmeData += '\nGenerated using Project Whiteboard.\n'
+  readmeData += 'Check it out at '
     + 'https://github.com/clovenski/project-whiteboard' + '\n'
   fs.writeFileSync(path.join(tmpDir.name, 'README.txt'), readmeData)
 

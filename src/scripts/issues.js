@@ -106,7 +106,7 @@ function addIssue(issue) {
   )
 
   // delete button at end of issue data
-  var delBtn = $('<button>delete</button>').on('click', () => {
+  var delBtn = $('<button id="delBtn">delete</button>').on('click', () => {
     $('.issueDiv #data-' + issue.hashid).parent().remove()
     projectIssues.some((elem, i) => {
       if (elem.hashid == issue.hashid) {

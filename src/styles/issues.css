@@ -47,8 +47,19 @@
   padding: 0 3px;
   position: relative;
   bottom: -6px;
+  cursor: pointer;
 }
 
-#addBtn:hover {
+.archBtn {
+  margin: 5px;
+  cursor: pointer;
+}
+
+#delBtn {
+  margin: 5px 0;
+}
+
+#delBtn:hover {
+  color: red;
   cursor: pointer;
 }

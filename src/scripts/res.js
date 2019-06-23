@@ -54,7 +54,12 @@ function addResource(res) {
     class: 'resDiv',
     id: 'res-' + res.hashid
   })
-  var img = $('<img>').attr({ src: res.ref, class: 'resImg' })
+  var img = $('<img>').attr({
+    class: 'resImg',
+    src: res.ref,
+    title: res.ref,
+    draggable: false
+  })
   img.on('error', () => {
     let sub = $('<div>File not found. Click to add reference.</div>')
     sub.attr({ class: 'placeholder' })

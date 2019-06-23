@@ -2,6 +2,10 @@ const fs = require('fs')
 const path = require('path')
 const projectsDir = path.join(__dirname + '/../projects/')
 
+// today's date, ex. 8/10/1999
+var today = new Date()
+today = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`
+
 // default data of a new project
 var projectData = {
   info: {
@@ -11,8 +15,14 @@ var projectData = {
   },
   resources: [],
   timeline: {
-    activeID: null,
-    data: []
+    activeID: 0,
+    data: [
+      {
+        hashid: 0,
+        desc: 'Project started',
+        date: today
+      }
+    ]
   },
   tasks: [],
   issues: [],

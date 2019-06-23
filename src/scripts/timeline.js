@@ -66,7 +66,7 @@ function addMilestone(milestone, i, asActive) {
     {
       target: desc,
       id: milestone.hashid,
-      maxChars: 40,
+      maxChars: 28,
       defVal: defaultTitle,
       key: 'desc'
     }, editableText
@@ -81,7 +81,7 @@ function addMilestone(milestone, i, asActive) {
     {
       target: date,
       id: milestone.hashid,
-      maxChars: 10,
+      maxChars: 20,
       defVal: defaultDate,
       key: 'date'
     }, editableText
@@ -95,7 +95,9 @@ function addMilestone(milestone, i, asActive) {
     timeline.activeID = milestone.hashid
     sessionStorage.projectData = JSON.stringify(projectData)
     allowSaving()
-  }).attr('class', 'checkBox')
+  })
+  activeCheckBox.attr('class', 'checkBox')
+  activeCheckBox.css('margin', '3px 2em')
   var delBtn = $('<button id="delBtn">delete</button>').on('click', () => {
     if (container.hasClass('active')) {
       let target = container.prev().length == 1 ?

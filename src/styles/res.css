@@ -8,7 +8,7 @@
   max-width: 300px;
   max-height: 300px;
   margin: 10px;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .resDiv .resInfo {
@@ -49,4 +49,18 @@
   text-align: center;
   margin: 10px;
   line-height: 30px;
+  cursor: pointer;
+}
+
+#addBtn {
+  cursor: pointer;
+}
+
+#delBtn {
+  margin: 0 0 0 10px;
+}
+
+#delBtn:hover {
+  color: red;
+  cursor: pointer;
 }
