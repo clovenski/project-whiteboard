@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+#appInfo #appName {
+  font-size: 3em;
+}
+
 button {
   padding: 10px;
   background-color: rgb(35, 53, 73);
@@ -14,11 +18,32 @@ button:hover {
   cursor: pointer;
 }
 
+#new #createDiv {
+  margin: 15px;
+}
+
 #loadBtns {
   margin: 12px;
 }
 
-#loadBtns button {
+#loadBtns .loadProjBtn {
   display: inline-block;
   margin: 3px;
+}
+
+#delete {
+  margin: 3em 0 0 0;
+}
+
+#delBtns {
+  margin: 12px;
+}
+
+#delBtns .delProjBtn {
+  display: inline-block;
+  margin: 3px;
+}
+
+#delBtns .delProjBtn:hover {
+  color: rgb(255, 25, 25);
 }

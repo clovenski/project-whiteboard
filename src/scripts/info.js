@@ -3,7 +3,6 @@ const allowSaving = eval(sessionStorage.allowSaving)
 let projectData = JSON.parse(sessionStorage.projectData)
 let projectInfo = projectData.info
 let resources = projectData.resources
-const resDir = sessionStorage.projDir + 'res/'
 
 const defAuthor = 'no author'
 const defDesc = 'empty description'

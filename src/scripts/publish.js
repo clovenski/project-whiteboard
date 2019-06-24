@@ -11,7 +11,7 @@ $('#header').css({
   top: 0
 })
 
-$('title').text(projectData.info.name)
+$('title').text(projectData.info.name + ' publish preview')
 
 // fill project info content
 let infoSelector = '#info-content'
