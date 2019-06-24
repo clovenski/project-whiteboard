@@ -88,9 +88,9 @@ var publishLink = $('<a>PUBLISH</a>').attr({
 })
 publishLink.on('click', (e) => {
   e.preventDefault()
-  let jsCodePath = './src/scripts/publish.js'
+  let jsCodePath = require('path').join(__dirname, 'scripts/publish.js')
   let remote = require('electron').remote
-  let win = new remote.BrowserWindow({
+  var win = new remote.BrowserWindow({
     parent: remote.getCurrentWindow(),
     modal: true,
     show: false,
@@ -105,11 +105,13 @@ publishLink.on('click', (e) => {
   require('fs').readFile(jsCodePath, 'utf-8', (err, data) => {
     if (err) throw err
     let projectData = sessionStorage.projectData
-    win.webContents.executeJavaScript(`const projectData=${projectData}`)
-      .then(() => { win.webContents.executeJavaScript(data) })
+    win.loadURL(`file://${__dirname}/publish.html`).then(() => {
+      win.webContents.executeJavaScript(`const projectData=${projectData}`)
+        .then(() => {
+          win.webContents.executeJavaScript(data).then(() => { win.show() })
+        })
+    })
   })
-  win.loadURL(`file://${__dirname}/publish.html`)
-  win.on('ready-to-show', () => { win.show() })
 })
 navbar.append(publishLink)
 
