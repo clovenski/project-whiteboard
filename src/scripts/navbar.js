@@ -7,7 +7,7 @@ sessionStorage.allowSaving = () => {
     e.preventDefault()
     // create project dir if not exists
     if (!fs.existsSync(sessionStorage.projDir)) {
-      fs.mkdirSync(sessionStorage.projDir)
+      fs.mkdirSync(sessionStorage.projDir, { recursive: true })
     }
     fs.writeFileSync(
       sessionStorage.saveFilePath,
