@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const dialog = require('electron').remote.dialog
 const projectsDir = path.join(__dirname + '/../projects/')
 
 // today's date, ex. 8/10/1999
@@ -60,7 +61,11 @@ $('#loadBtn').on('click', () => {
   try {
     var projects = fs.readdirSync(projectsDir)
   } catch (err) {
-    alert('No projects detected in directory: ' + projectsDir)
+    // alert('No projects detected in directory: ' + projectsDir)
+    dialog.showMessageBox({
+      type: 'error',
+      message: 'No projects detected in directory: ' + projectsDir
+    })
     return
   }
   projects.forEach((name, index) => {
