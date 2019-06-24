@@ -7,7 +7,7 @@ function createWindow() {
     title: 'Project Whiteboard',
     minWidth: 300,
     minHeight: 370,
-    width: 770,
+    width: 800,
     height: 700,
     webPreferences: {
       nodeIntegration: true

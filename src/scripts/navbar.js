@@ -3,8 +3,13 @@ sessionStorage.allowSaving = () => {
   sessionStorage.changesMade = true
   $('#saveBtn, #saveAsBtn').removeClass('activeLink')
   var btnFunc = (e) => {
+    const fs = require('fs')
     e.preventDefault()
-    require('fs').writeFileSync(
+    // create project dir if not exists
+    if (!fs.existsSync(sessionStorage.projDir)) {
+      fs.mkdirSync(sessionStorage.projDir)
+    }
+    fs.writeFileSync(
       sessionStorage.saveFilePath,
       JSON.stringify(JSON.parse(sessionStorage.projectData), null, 2)
     )

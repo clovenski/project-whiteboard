@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const dialog = require('electron').remote.dialog
-const projectsDir = path.join(__dirname + '/../projects/')
+const projectsDir = path.resolve(__dirname, '../projects/')
 
 // today's date, ex. 8/10/1999
 var today = new Date()
@@ -10,7 +10,7 @@ today = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`
 // default data of a new project
 var projectData = {
   info: {
-    name: 'untitled', //placeholder, expected to be overwritten
+    name: 'untitled', // placeholder, expected to be overwritten
     author: '',
     body: []
   },
@@ -39,9 +39,9 @@ $('#createDiv').hide()
 $('#createBtn').on('click', () => {
   let projName = $('#createDiv #projNameInput').val()
   if (projName != '') {
-    var projDir = path.join(projectsDir + projName + '/')
+    var projDir = path.join(projectsDir, projName)
     sessionStorage.projDir = projDir
-    sessionStorage.saveFilePath = projDir + projName + '.json'
+    sessionStorage.saveFilePath = path.join(projDir, projName + '.json')
     projectData.info.name = projName
 
     sessionStorage.projectData = JSON.stringify(projectData)
@@ -61,7 +61,6 @@ $('#loadBtn').on('click', () => {
   try {
     var projects = fs.readdirSync(projectsDir)
   } catch (err) {
-    // alert('No projects detected in directory: ' + projectsDir)
     dialog.showMessageBox({
       type: 'error',
       message: 'No projects detected in directory: ' + projectsDir
@@ -70,7 +69,7 @@ $('#loadBtn').on('click', () => {
   }
   projects.forEach((name, index) => {
     // check if json file exists in the project directory
-    var filePath = projectsDir + name + '/' + name + '.json'
+    var filePath = path.join(projectsDir, name, name + '.json')
     if (!fs.existsSync(filePath)) {
       delete projects[index]
     }
@@ -87,11 +86,12 @@ $('#loadBtn').on('click', () => {
       $('#loadBtns').append(btn)
   
       // add onclick event listener
-      $(btn).on('click', () => {
-        $.getJSON(projectsDir + name + '/' + name + '.json', (data) => {
-          var projDir = path.join(projectsDir + data.info.name + '/')
+      btn.on('click', () => {
+        $.getJSON(path.join(projectsDir, name, name + '.json'), (data) => {
+          var projDir = path.join(projectsDir, data.info.name)
           sessionStorage.projDir = projDir
-          sessionStorage.saveFilePath = projDir + data.info.name + '.json'
+          sessionStorage.saveFilePath =
+            path.join(projDir, data.info.name + '.json')
           sessionStorage.projectData = JSON.stringify(data)
           sessionStorage.changesMade = false
           window.location = 'info.html'
@@ -100,7 +100,10 @@ $('#loadBtn').on('click', () => {
     })
     $('.loadProjBtn').fadeIn()
   } else {
-    alert('No projects detected in directory: ' + projectsDir)
+    dialog.showMessageBox({
+      type: 'error',
+      message: 'No projects detected in directory: ' + projectsDir
+    })
   }
 }) // end loadBtn onclick
 
