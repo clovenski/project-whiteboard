@@ -99,7 +99,9 @@ publishLink.on('click', (e) => {
     }
   })
   win.removeMenu()
-  // win.webContents.openDevTools() // for developing
+  if (require('electron').remote.process.argv.includes('--debug')) {
+    win.webContents.openDevTools() // for developing
+  }
   require('fs').readFile(jsCodePath, 'utf-8', (err, data) => {
     if (err) throw err
     let projectData = sessionStorage.projectData

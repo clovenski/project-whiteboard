@@ -14,7 +14,9 @@ function createWindow() {
     }
   })
   win.loadFile('./src/home.html')
-  // win.webContents.openDevTools() // for developing
+  if (process.argv.includes('--debug')) {
+    win.webContents.openDevTools() // for developing
+  }
   win.removeMenu()
   win.on('closed', () => {
     win = null
