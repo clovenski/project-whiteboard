@@ -17,7 +17,7 @@ Another major feature is the ability to *publish* your project, generating a zip
 
 ## Installation
 
-A 64-bit Windows release can be found [here](https://github.com/clovenski/project-whiteboard/releases). Download the appropriate file, unzip it and the executable to start the app can be found in there.
+A 64-bit Windows release can be found [here](https://github.com/clovenski/project-whiteboard/releases). Download the appropriate file, unzip it and the executable to start the app can be found in there; `project-whiteboard.exe`.
 
 Otherwise, clone/download this repo, make sure you have Node.js installed, then install the app with `npm install`. The shell script `start.sh` can then be used to effectively start the app.
 
