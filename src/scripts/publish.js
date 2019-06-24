@@ -3,13 +3,10 @@ const fs = require('fs')
 const tmp = require('tmp')
 const archiver = require('archiver')
 const path = require('path')
+const dialog = require('electron').remote.dialog
 window.$ = window.jQuery = require('jquery')
 
-
-// append info to header: path to publishes directory
-$('#header').append('The zip file will be located in '
-  + path.resolve(__dirname, '../publishes/')
-).css({
+$('#header').css({
   position: 'sticky',
   top: 0
 })
@@ -224,6 +221,17 @@ if (projectData.archive.length == 0) {
 
 // publish button on click func
 $('#publishBtn').on('click', () => {
+  // first prompt for file path of resulting zip file
+  let zipFilePath = dialog.showSaveDialog({
+    title: 'File location',
+    defaultPath: path.join(
+      require('electron').remote.app.getPath('documents'),
+      projectData.info.name + '-publish.zip'
+    ),
+    filters: [{ name: '.zip', extensions: ['zip'] }]
+  })
+  if (zipFilePath === undefined) { return }
+
   $('#header, #control').remove()
 
   // change src ref for all images to res/ dir
@@ -262,19 +270,10 @@ $('#publishBtn').on('click', () => {
     $('<p style="font-size:1.5em">Generating the zip file. . . </p>')
   )
 
-  // zip the directory
-  let zipFilePath = path.resolve(
-    `${__dirname}/../publishes/${projectData.info.name}.zip`
-  )
-  if (!fs.existsSync(zipFilePath)) {
-    // create publishes dir if not exists
-    if (!fs.existsSync(path.resolve(`${__dirname}/../publishes/`))) {
-      fs.mkdirSync(path.resolve(`${__dirname}/../publishes/`))
-    }
-    // create zip file
-    fs.closeSync(fs.openSync(zipFilePath, 'w'))
-  }
-
+  // create zip file to be used
+  fs.closeSync(fs.openSync(zipFilePath, 'w'))
+  
+  // zipping the directory
   let output = fs.createWriteStream(zipFilePath)
   output.on('finish', () => {
     // show 'DONE' for confirmation of zip file generated
@@ -289,4 +288,3 @@ $('#publishBtn').on('click', () => {
   archive.directory(tmpDir.name, projectData.info.name)
   archive.finalize()
 })
-

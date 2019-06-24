@@ -1,7 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 const dialog = require('electron').remote.dialog
-const projectsDir = path.resolve(__dirname, '../projects/')
+const app = require('electron').remote.app
+const projectsDir = path.join(app.getPath('userData'), 'projects/')
 
 // today's date, ex. 8/10/1999
 var today = new Date()
@@ -63,7 +64,8 @@ $('#loadBtn').on('click', () => {
   } catch (err) {
     dialog.showMessageBox({
       type: 'error',
-      message: 'No projects detected in directory: ' + projectsDir
+      message: 'No projects detected in directory:',
+      detail: projectsDir
     })
     return
   }
@@ -102,7 +104,8 @@ $('#loadBtn').on('click', () => {
   } else {
     dialog.showMessageBox({
       type: 'error',
-      message: 'No projects detected in directory: ' + projectsDir
+      message: 'No projects detected in directory:',
+      detail: projectsDir
     })
   }
 }) // end loadBtn onclick
