@@ -5,6 +5,7 @@ A tool to help manage, organize and showcase projects.
 ## Usage
 
 This application allows you to keep track of some common aspects of a project:
+- project information
 - image resources
 - a timeline (roadmap)
 - a tasks list (to-do list)
@@ -28,6 +29,8 @@ Otherwise, clone/download this repo, make sure you have Node.js installed, then 
 Closing the main window currently does not check if you have any unsaved changes, so be cautious when doing so as you will lose those changes.
 
 ## Examples
+
+An example of a published project can be seen [here](https://clovenski.github.io/project-whiteboard/)
 
 ![](/assets/ex_1.JPG)
 
