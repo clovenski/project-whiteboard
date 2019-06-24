@@ -29,8 +29,8 @@ Closing the main window currently does not check if you have any unsaved changes
 
 ## Examples
 
-[![](/assets/ex_1.JPG)](#)
+![](/assets/ex_1.JPG)
 
-[![](/assets/ex_2.JPG)](#)
+![](/assets/ex_2.JPG)
 
-[![](/assets/ex_3.JPG)](#)
+![](/assets/ex_3.JPG)
